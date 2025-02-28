@@ -51,8 +51,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       ui:
-        specifier: github:shadcn/ui
-        version: git+https://git@github.com:shadcn/ui.git#57d15bb2d5d5ea3407815b287c68dcdabc9f1d0a(@types/node@20.17.19)(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.7.3))(typescript@5.7.3)
+        specifier: https://github.com/shadcn/ui
+        version: git+https://git@github.com:shadcn/ui.git#fed2bac1d948f45538480abdc81be894b2e1c43c(@types/node@20.17.19)(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.7.3))(typescript@5.7.3)
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -4260,8 +4260,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  ui@git+https://git@github.com:shadcn/ui.git#57d15bb2d5d5ea3407815b287c68dcdabc9f1d0a:
-    resolution: {commit: 57d15bb2d5d5ea3407815b287c68dcdabc9f1d0a, repo: git@github.com:shadcn/ui.git, type: git}
+  ui@git+https://git@github.com:shadcn/ui.git#fed2bac1d948f45538480abdc81be894b2e1c43c:
+    resolution: {commit: fed2bac1d948f45538480abdc81be894b2e1c43c, repo: git@github.com:shadcn/ui.git, type: git}
     version: 0.0.1
 
   unbox-primitive@1.1.0:
@@ -4842,7 +4842,7 @@ snapshots:
       '@types/node': 20.5.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@5.7.3)
-      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.7.3))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.7.3))(typescript@5.7.3)
+      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.7.3))(ts-node@10.9.2(@types/node@20.17.19)(typescript@5.7.3))(typescript@5.7.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -6427,7 +6427,7 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.7.3))(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.7.3))(typescript@5.7.3):
+  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@5.7.3))(ts-node@10.9.2(@types/node@20.17.19)(typescript@5.7.3))(typescript@5.7.3):
     dependencies:
       '@types/node': 20.5.1
       cosmiconfig: 8.3.6(typescript@5.7.3)
@@ -9185,7 +9185,7 @@ snapshots:
 
   typescript@5.7.3: {}
 
-  ui@git+https://git@github.com:shadcn/ui.git#57d15bb2d5d5ea3407815b287c68dcdabc9f1d0a(@types/node@20.17.19)(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.7.3))(typescript@5.7.3):
+  ui@git+https://git@github.com:shadcn/ui.git#fed2bac1d948f45538480abdc81be894b2e1c43c(@types/node@20.17.19)(ts-node@10.9.2(@types/node@20.5.1)(typescript@5.7.3))(typescript@5.7.3):
     dependencies:
       '@babel/core': 7.26.9
       '@changesets/changelog-github': 0.4.8
