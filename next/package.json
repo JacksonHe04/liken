@@ -23,7 +23,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.2",
-    "ui": "github:shadcn/ui"
+    "ui": "https://github.com/shadcn/ui"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
