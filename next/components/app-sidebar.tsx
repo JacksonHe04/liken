@@ -8,10 +8,11 @@ import {
   Command,
   Frame,
   GalleryVerticalEnd,
-  Map,
-  PieChart,
+  // 移除未使用的导入
+  // Map,
+  // PieChart,
   Settings2,
-  SquareTerminal,
+  // SquareTerminal,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
