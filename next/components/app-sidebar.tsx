@@ -52,106 +52,115 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
+      title: "模型",
+      url: "/models",
       icon: Bot,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "GPT-4",
+          url: "/models/gpt4",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Claude 2",
+          url: "/models/claude2",
         },
         {
-          title: "Quantum",
-          url: "#",
+          title: "Gemini Pro",
+          url: "/models/gemini-pro",
+        },
+        {
+          title: "LLaMA 2",
+          url: "/models/llama2",
         },
       ],
     },
     {
-      title: "Documentation",
-      url: "#",
+      title: "知识库",
+      url: "/knowledge",
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "文档管理",
+          url: "/knowledge/documents",
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: "知识图谱",
+          url: "/knowledge/graph",
         },
         {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "数据分析",
+          url: "/knowledge/analysis",
         },
       ],
     },
     {
-      title: "Settings",
-      url: "#",
+      title: "多模态",
+      url: "/multimodal",
+      icon: Frame,
+      items: [
+        {
+          title: "文档生成",
+          url: "/multimodal/word",
+        },
+        {
+          title: "PPT生成",
+          url: "/multimodal/ppt",
+        },
+        {
+          title: "图片生成",
+          url: "/multimodal/image",
+        },
+        {
+          title: "视频生成",
+          url: "/multimodal/video",
+        },
+      ],
+    },
+    {
+      title: "设置",
+      url: "/settings",
       icon: Settings2,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "基本设置",
+          url: "/settings/general",
         },
         {
-          title: "Team",
-          url: "#",
+          title: "API配置",
+          url: "/settings/api",
         },
         {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          title: "用户管理",
+          url: "/settings/users",
         },
       ],
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
+      name: "GPT-4对话",
+      url: "/chat/gpt4",
+      icon: Bot,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
+      name: "Claude对话",
+      url: "/chat/claude",
+      icon: Bot,
     },
     {
-      name: "Travel",
-      url: "#",
-      icon: Map,
+      name: "Gemini对话",
+      url: "/chat/gemini",
+      icon: Bot,
+    },
+    {
+      name: "LLaMA对话",
+      url: "/chat/llama",
+      icon: Bot,
+    },
+    {
+      name: "Mixtral对话",
+      url: "/chat/mixtral",
+      icon: Bot,
     },
   ],
 }
