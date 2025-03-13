@@ -17,16 +17,25 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
           // 自定义代码块样式
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '')
-            return !inline ? (
-              <span className={`${className} rounded-md p-1 bg-gray-200 overflow-auto`}>
-                <code {...props} className={match ? `language-${match[1]}` : ''}>
+            
+            // 修改判断逻辑：如果是行内代码（inline 为 true）或者没有语言标识，则使用行内样式
+            if (inline || !match) {
+              return (
+                <code {...props} className="bg-gray-200 dark:bg-gray-800 rounded px-1">
                   {children}
                 </code>
-              </span>
-            ) : (
-              <code {...props} className="bg-red-100 dark:bg-gray-800 rounded px-1">
-                {children}
-              </code>
+              )
+            }
+            
+            // 代码块的处理
+            return (
+              <div className="rounded-lg bg-gray-200 dark:bg-gray-800 p-4 my-4">
+                <span className={`${className} block`}>
+                  <code {...props} className={`language-${match[1]}`}>
+                    {children}
+                  </code>
+                </span>
+              </div>
             )
           },
           // 自定义链接样式
@@ -66,19 +75,19 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
             <h1 {...props} className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8 dark:text-gray-100" />
           ),
           h2: ({ node, ...props }) => (
-            <h2 {...props} className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-6 dark:text-gray-200 dark:border-gray-700" />
+            <h2 {...props} className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 my-6 dark:text-gray-200 dark:border-gray-700" />
           ),
           h3: ({ node, ...props }) => (
-            <h3 {...props} className="scroll-m-20 text-2xl font-semibold tracking-tight mb-4 dark:text-gray-300" />
+            <h3 {...props} className="scroll-m-20 text-2xl font-semibold tracking-tight my-4 dark:text-gray-300" />
           ),
           h4: ({ node, ...props }) => (
-            <h4 {...props} className="scroll-m-20 text-xl font-semibold tracking-tight mb-4 dark:text-gray-400" />
+            <h4 {...props} className="scroll-m-20 text-xl font-semibold tracking-tight my-4 dark:text-gray-400" />
           ),
           h5: ({ node, ...props }) => (
-            <h5 {...props} className="scroll-m-20 text-lg font-semibold tracking-tight mb-4 dark:text-gray-500" />
+            <h5 {...props} className="scroll-m-20 text-lg font-semibold tracking-tight my-4 dark:text-gray-500" />
           ),
           h6: ({ node, ...props }) => (
-            <h6 {...props} className="scroll-m-20 text-base font-semibold tracking-tight mb-4 dark:text-gray-600" />
+            <h6 {...props} className="scroll-m-20 text-base font-semibold tracking-tight my-4 dark:text-gray-600" />
           ),
         }}
       >
