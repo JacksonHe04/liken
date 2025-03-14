@@ -1,8 +1,8 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import {
-  Folder,
-  Forward,
+  Bot,
   MoreHorizontal,
   Trash2,
   type LucideIcon,
@@ -24,28 +24,47 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { chatDB } from "@/lib/db/chat-db"
 
-export function NavProjects({
-  projects,
-}: {
-  projects: {
-    name: string
-    url: string
-    icon: LucideIcon
-  }[]
-}) {
+interface Session {
+  id: string;
+  messages: Array<{
+    role: 'user' | 'assistant';
+    content: string;
+  }>;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export function NavProjects() {
   const { isMobile } = useSidebar()
+  const [sessions, setSessions] = useState<Session[]>([]);
+
+  useEffect(() => {
+    const loadSessions = async () => {
+      const sessionList = await chatDB.listSessions(20);
+      setSessions(sessionList);
+    };
+    loadSessions();
+
+    // 每30秒刷新一次会话列表
+    const interval = setInterval(loadSessions, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      <SidebarGroupLabel>Sessions</SidebarGroupLabel>
       <SidebarMenu>
-        {projects.map((item) => (
-          <SidebarMenuItem key={item.name}>
+        {sessions.map((session) => (
+          <SidebarMenuItem key={session.id}>
             <SidebarMenuButton asChild>
-              <a href={item.url}>
-                <item.icon />
-                <span>{item.name}</span>
+              <a href={`/chat/${session.id}`}>
+                <Bot />
+                <span>
+                  {session.messages[0]?.content.slice(0, 20) || '新会话'}
+                  {session.messages[0]?.content.length > 20 ? '...' : ''}
+                </span>
               </a>
             </SidebarMenuButton>
             <DropdownMenu>
@@ -60,29 +79,17 @@ export function NavProjects({
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
-                <DropdownMenuItem>
-                  <Folder className="text-muted-foreground" />
-                  <span>View Project</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Forward className="text-muted-foreground" />
-                  <span>Share Project</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={async () => {
+                  await chatDB.deleteSession(session.id);
+                  setSessions(sessions.filter(s => s.id !== session.id));
+                }}>
                   <Trash2 className="text-muted-foreground" />
-                  <span>Delete Project</span>
+                  <span>删除会话</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   )

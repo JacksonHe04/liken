@@ -1,40 +1,52 @@
 "use client"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 import { ChatInput } from "@/components/chat-input"
-import { LikeLogo } from "@/components/ui/logo/like-logo"
 import { ChatMessage } from "@/components/chat-message"
-import { chatDB } from "@/lib/db/chat-db"
+import { LikeLogo } from "@/components/ui/logo/like-logo"
 import { useChatContext } from "@/contexts/chat-context"
 
-export default function Page() {
-  const router = useRouter();
-  const { setMessages, setIsLoading, messages, isLoading } = useChatContext();
-  const [showLogo, setShowLogo] = useState(true);
+export default function ChatPage() {
+  const { messages, setMessages, isLoading, setIsLoading } = useChatContext();
+  const [showLogo, setShowLogo] = useState(messages.length === 0);
+
+  useEffect(() => {
+    setIsLoading(false);
+    // 检查是否需要自动发送请求获取AI回复
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage?.role === 'user') {
+      handleSubmit(lastMessage.content);
+    }
+  }, []);
 
   const handleSubmit = async (content: string) => {
     if (!content.trim() || isLoading) return;
+
+    setShowLogo(false);
+    const userMessage = { role: 'user', content };
+    setMessages(prev => {
+      // 检查是否已经存在相同的消息
+      const lastMessage = prev[prev.length - 1];
+      if (lastMessage?.role === 'user' && lastMessage.content === content) {
+        return prev;
+      }
+      return [...prev, userMessage];
+    });
     setIsLoading(true);
 
     try {
-      const sessionId = await chatDB.createSession();
-      const userMessage = { role: 'user' as const, content };
-      await chatDB.addMessage(sessionId, userMessage);
-      
-      // 发送AI请求
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [userMessage] }),
+        body: JSON.stringify({ messages: [...messages, userMessage] }),
       });
 
-      if (!response.ok) throw new Error('AI请求失败');
+      if (!response.ok) throw new Error('请求失败');
       
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
-      let assistantMessage = { role: 'assistant' as const, content: '' };
+      let assistantMessage = { role: 'assistant', content: '' };
 
       while (reader) {
         const { done, value } = await reader.read();
@@ -57,6 +69,16 @@ export default function Page() {
 
               if (parsedData.text) {
                 assistantMessage.content += parsedData.text;
+                setMessages(prev => {
+                  const newMessages = [...prev];
+                  const lastMessage = newMessages[newMessages.length - 1];
+                  if (lastMessage?.role === 'assistant') {
+                    newMessages[newMessages.length - 1] = assistantMessage;
+                  } else {
+                    newMessages.push(assistantMessage);
+                  }
+                  return newMessages;
+                });
               }
             } catch (e) {
               console.error('处理响应数据失败:', e);
@@ -64,16 +86,13 @@ export default function Page() {
           }
         }
       }
-
-      // 保存AI回复到会话
-      await chatDB.addMessage(sessionId, assistantMessage);
-      setMessages([userMessage, assistantMessage]);
-      router.push(`/chat/${sessionId}`);
     } catch (error) {
-      console.error('处理消息失败:', error);
+      console.error('发送消息失败:', error);
+    } finally {
       setIsLoading(false);
     }
   };
+
 
   return (
     <>

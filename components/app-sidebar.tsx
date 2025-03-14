@@ -137,7 +137,7 @@ const data = {
       ],
     },
   ],
-  projects: [
+  sessions: [
     {
       name: "GPT-4对话",
       url: "/chat/gpt4",
@@ -174,7 +174,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavProjects sessions={data.sessions} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

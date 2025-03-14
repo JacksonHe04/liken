@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>LLM-NIKE</h1>
+  <h1>LIKEN</h1>
   <b>LLM Next Interactive Knowledge Engine</b>
   <p>基于 Next.js 的大模型交互知识引擎</p>
 </div>
@@ -15,7 +15,7 @@
 
 ## 📖 简介
 
-LLM-NIKE (LLM-Next-Interactive-Knowledge-Engine) 是一个强大的知识库交互引擎，它能够将任何领域的专业知识转化为智能对话系统。通过多模态交互、知识图谱增强和检索增强生成（RAG）等技术，为用户提供精准的知识服务。
+LIKEN (LLM-Next-Interactive-Knowledge-Engine) 是一个强大的知识库交互引擎，它能够将任何领域的专业知识转化为智能对话系统。通过多模态交互、知识图谱增强和检索增强生成（RAG）等技术，为用户提供精准的知识服务。
 
 ### 🌟 主要特性
 
@@ -40,8 +40,8 @@ LLM-NIKE (LLM-Next-Interactive-Knowledge-Engine) 是一个强大的知识库交�
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/yourusername/LLM-NIKE.git
-cd LLM-NIKE
+git clone https://github.com/yourusername/LIKEN.git
+cd LIKEN
 ```
 
 2. 安装前端依赖
@@ -93,7 +93,7 @@ pnpm run dev
 ## 📦 项目结构
 
 ```plaintext
-LLM-NIKE/
+LIKEN/
 ├── app/                    # Next.js 应用主目录
 ├── services/               # Python微服务
 ├── config/                 # 配置文件

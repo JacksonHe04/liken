@@ -21,7 +21,8 @@ export async function POST(req: NextRequest) {
 
     // 创建流式响应
     const stream = await openai.chat.completions.create({
-      model: 'deepseek-r1-250120',
+      // model: 'deepseek-r1-250120',
+      model: 'doubao-1.5-lite-32k-250115',
       messages: [
         { role: 'system', content: '你是人工智能助手' },
         ...messages,
