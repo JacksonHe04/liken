@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LLM-NIKE",
+  title: "LIKEN | LLM 驱动的交互式知识引擎（Powered by Next.js）",
   description: "基于 Next.js 的大模型交互知识引擎",
 };
 

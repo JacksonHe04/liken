@@ -56,7 +56,7 @@ export function ChatInput({ onSubmit, disabled = false }: ChatInputProps) {
           </Button>
 
           <Button type="button" variant="ghost" size="sm" className="rounded-full text-xs flex items-center px-3 py-1.5 hover:bg-gray-100/80">
-            <span>Reason</span>
+            <span>推理</span>
           </Button>
         </div>
 

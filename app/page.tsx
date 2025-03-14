@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 import { ChatInput } from "@/components/chat-input"
 import { ChatMessage } from "@/components/chat-message"
+import { LikeLogo } from "@/components/ui/logo/like-logo"
 
 export default function Page() {
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant', content: string }>>([]);
@@ -85,8 +86,9 @@ export default function Page() {
       </header>
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         {showLogo && (
-          <div className="flex-1 flex items-center justify-center">
-            <Image src="/next.svg" alt="Next.js icon" width={200} height={200} />
+          <div className="flex-1 flex flex-col items-center justify-center gap-2">
+            <LikeLogo className="text-primary dark:text-primary-foreground" width={300} height={130} />
+            <Image src="/next.svg" alt="Next.js icon" width={200} height={80} />
           </div>
         )}
         <div className="flex-1 flex flex-col justify-end">
