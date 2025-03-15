@@ -8,11 +8,7 @@ import {
   Command,
   Frame,
   GalleryVerticalEnd,
-  // 移除未使用的导入
-  // Map,
-  // PieChart,
   Settings2,
-  // SquareTerminal,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -27,29 +23,22 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-// This is sample data.
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    // avatar: "/avatars/shadcn.jpg",
+    name: "Jackson He",
+    email: "JacksonHe04c@gmail.com",
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "SEU",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      plan: "Southeast University",
     },
     {
-      name: "Acme Corp.",
+      name: "PALM Lab",
       logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
+      plan: "东南大学 PALM 实验室",
+    }
   ],
   navMain: [
     {
@@ -58,20 +47,20 @@ const data = {
       icon: Bot,
       items: [
         {
-          title: "GPT-4",
-          url: "/models/gpt4",
+          title: "DeepSeek-R1",
+          url: "/models/deepseek-r1",
         },
         {
-          title: "Claude 2",
-          url: "/models/claude2",
+          title: "DeepSeek-V3",
+          url: "/models/deepseek-v3",
         },
         {
-          title: "Gemini Pro",
-          url: "/models/gemini-pro",
+          title: "Doubao-1.5-Lite-32K",
+          url: "/models/doubao-1.5-lite-32k",
         },
         {
-          title: "LLaMA 2",
-          url: "/models/llama2",
+          title: "Doubao-1.5-Vision-Pro-32K",
+          url: "/models/doubao-1.5-vision-pro-32k",
         },
       ],
     },
@@ -104,7 +93,7 @@ const data = {
           url: "/multimodal/word",
         },
         {
-          title: "PPT生成",
+          title: "PPT 生成",
           url: "/multimodal/ppt",
         },
         {
@@ -127,7 +116,7 @@ const data = {
           url: "/settings/general",
         },
         {
-          title: "API配置",
+          title: "API 配置",
           url: "/settings/api",
         },
         {
@@ -135,33 +124,6 @@ const data = {
           url: "/settings/users",
         },
       ],
-    },
-  ],
-  sessions: [
-    {
-      name: "GPT-4对话",
-      url: "/chat/gpt4",
-      icon: Bot,
-    },
-    {
-      name: "Claude对话",
-      url: "/chat/claude",
-      icon: Bot,
-    },
-    {
-      name: "Gemini对话",
-      url: "/chat/gemini",
-      icon: Bot,
-    },
-    {
-      name: "LLaMA对话",
-      url: "/chat/llama",
-      icon: Bot,
-    },
-    {
-      name: "Mixtral对话",
-      url: "/chat/mixtral",
-      icon: Bot,
     },
   ],
 }

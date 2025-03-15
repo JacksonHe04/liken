@@ -1,6 +1,6 @@
 "use client"
 import { useState, FormEvent, useEffect, useRef } from "react"
-import { Mic, Plus, Search, Send } from "lucide-react"
+import { Mic, Plus, Search, Sparkle, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -11,6 +11,7 @@ type ChatInputProps = {
 
 export function ChatInput({ onSubmit, disabled = false }: ChatInputProps) {
   const [input, setInput] = useState('')
+  const [isInferenceActive, setInferenceActive] = useState(false) // 新增状态
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
@@ -50,12 +51,15 @@ export function ChatInput({ onSubmit, disabled = false }: ChatInputProps) {
         </Button>
 
         <div className="flex gap-2 absolute left-16">
-          <Button type="button" variant="ghost" size="sm" className="rounded-full text-xs flex items-center gap-1.5 px-3 py-1.5 hover:bg-gray-100/80">
-            <Search className="h-3.5 w-3.5" />
-            <span>搜索</span>
-          </Button>
-
-          <Button type="button" variant="ghost" size="sm" className="rounded-full text-xs flex items-center px-3 py-1.5 hover:bg-gray-100/80">
+          {/* 移除“搜索”按钮 */}
+          <Button 
+            type="button" 
+            variant="ghost" 
+            size="sm" 
+            className={`rounded-full text-xs flex items-center px-3 py-1.5 ${isInferenceActive ? 'bg-gray-100/80' : 'hover:bg-gray-100/80'}`} 
+            onClick={() => setInferenceActive(!isInferenceActive)} // 更新状态
+          >
+            <Sparkle className="h-4 w-4 mr-1" />
             <span>推理</span>
           </Button>
         </div>
@@ -73,7 +77,7 @@ export function ChatInput({ onSubmit, disabled = false }: ChatInputProps) {
           }}
           onKeyDown={handleKeyDown}
           disabled={disabled}
-          className="pl-52 pr-16 py-6 border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 min-h-[60px] resize-none whitespace-pre-wrap break-words overflow-y-auto w-full rounded-md bg-transparent" 
+          className="pl-52 pr-16 py-6 border-none focus-visible:outline-none focus-visible:ring-0 min-h-[60px] resize-none whitespace-pre-wrap break-words overflow-y-auto w-full rounded-md bg-transparent" 
           placeholder="询问任何问题" 
           rows={1}
           style={{ height: 'auto', minHeight: '60px', maxHeight: '200px', overflowY: 'auto' }}

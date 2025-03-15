@@ -45,8 +45,8 @@ export function NavProjects() {
   useEffect(() => {
     // 异步加载会话
     const loadSessions = async () => {
-      const sessionList = await chatDB.listSessions(30); // 从数据库获取会话列表
-      // console.log('Loaded sessions:', sessionList); // 添加日志输出
+      const sessionList = await chatDB.listSessions(100); // 从数据库获取会话列表
+      console.log('Loaded sessions:', sessionList); // 添加日志输出
       setSessions(sessionList); // 更新会话状态
     };
     loadSessions();

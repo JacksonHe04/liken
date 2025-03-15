@@ -91,7 +91,6 @@ export default function Page() {
           {/* Logo和图片展示区域 */}
           <div className="flex-1 flex flex-col items-center justify-center gap-2">
             <LikeLogo className="text-primary dark:text-primary-foreground" width={300} height={130} />
-            <Image src="/next.svg" alt="Next.js icon" width={200} height={80} />
           </div>
           {/* 聊天输入区域 */}
           <div className="flex-1 flex flex-col justify-center">
