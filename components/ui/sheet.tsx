@@ -33,7 +33,7 @@ function SheetPortal({
   // children,  // 移除未使用的参数
   ...props
 }: SheetPortalProps) {
-  return <DialogPortal {...props} />
+  return <SheetPrimitive.Portal {...props} />
 }
 SheetPortal.displayName = SheetPrimitive.Portal.displayName
 

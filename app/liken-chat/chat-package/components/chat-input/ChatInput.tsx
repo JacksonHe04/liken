@@ -1,10 +1,10 @@
 "use client"
 import { useState, FormEvent, useRef } from "react"
 import { Send } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useTextareaAutoHeight } from "@/components/hooks/use-textarea-auto-height"
-import { ChatInputButtons } from "@/components/chat-input/chat-input-buttons"
-import type { ChatInputProps } from "@/components/chat-input/types"
+import { Button } from "../ui/Button"
+import { useTextareaAutoHeight } from "./hooks/useTextareaAutoHeight"
+import { ChatInputButtons } from "./components/InputButtons"
+import type { ChatInputProps } from "../../types/input"
 
 export function ChatInput({ onSubmit, onClear, disabled = false }: ChatInputProps) {
   const [input, setInput] = useState('')
@@ -75,4 +75,3 @@ export function ChatInput({ onSubmit, onClear, disabled = false }: ChatInputProp
     </form>
   )
 }
-
