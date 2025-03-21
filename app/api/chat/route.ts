@@ -3,8 +3,8 @@ import OpenAI from 'openai';
 
 // 初始化OpenAI客户端
 const openai = new OpenAI({
-  apiKey: process.env.ARK_API_KEY,
-  baseURL: 'https://ark.cn-beijing.volces.com/api/v3',
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
 export async function POST(req: NextRequest) {
