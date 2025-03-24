@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, use } from "react"
+import { useState, useEffect, use, useRef } from "react"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 import { ChatInput } from "@/components/chat-input"
@@ -21,8 +21,7 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
   useEffect(() => {
     const initSession = async () => {
       console.log('[ChatPage] 开始初始化会话');
-      const sessionId = unwrappedParams.sessionId; // 使用解包后的 sessionId
-      // 根据sessionId决定是创建新会话还是加载已有会话
+      const sessionId = unwrappedParams.sessionId;
       if (sessionId === 'new') {
         console.log('[ChatPage] 创建新会话');
         await createSession();
@@ -31,16 +30,9 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
         await loadSession(sessionId);
       }
       setIsLoading(false);
-      // 检查是否需要自动发送请求获取AI回复
-      const lastMessage = messages[messages.length - 1];
-      if (lastMessage?.role === 'user') {
-        console.log('[ChatPage] 检测到未回复的用户消息，自动发送请求');
-        handleSubmit(lastMessage.content);
-      }
-      console.log('[ChatPage] 会话初始化完成，当前消息列表:', messages);
     };
     initSession();
-  }, [unwrappedParams]); // 监听解包后的 params 的变化
+  }, [unwrappedParams]);
 
   // 处理用户提交消息
   const handleSubmit = async (content: string) => {
@@ -49,8 +41,10 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
     console.log('[ChatPage] 开始处理用户消息:', content);
     setShowLogo(false);
     const userMessage = { role: 'user', content };
-    await addMessage(userMessage);
     setIsLoading(true);
+
+    // 更新UI显示用户消息
+    setMessages(prev => [...prev, userMessage]);
   
     try {
       // 发送消息到API
@@ -111,7 +105,8 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
       }
       
       console.log('[ChatPage] AI响应完成，保存到数据库');
-      // 只在消息完整接收后添加到数据库
+      // 保存用户消息和AI响应到数据库
+      await addMessage(userMessage);
       await addMessage({ ...assistantMessage, content: assistantMessage.content });
     } catch (error) {
       console.error('发送消息失败:', error);
