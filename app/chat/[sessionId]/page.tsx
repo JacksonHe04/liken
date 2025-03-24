@@ -20,19 +20,24 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
   // 初始化会话的副作用
   useEffect(() => {
     const initSession = async () => {
+      console.log('[ChatPage] 开始初始化会话');
       const sessionId = unwrappedParams.sessionId; // 使用解包后的 sessionId
       // 根据sessionId决定是创建新会话还是加载已有会话
       if (sessionId === 'new') {
+        console.log('[ChatPage] 创建新会话');
         await createSession();
       } else {
+        console.log('[ChatPage] 加载已有会话:', sessionId);
         await loadSession(sessionId);
       }
       setIsLoading(false);
       // 检查是否需要自动发送请求获取AI回复
       const lastMessage = messages[messages.length - 1];
       if (lastMessage?.role === 'user') {
+        console.log('[ChatPage] 检测到未回复的用户消息，自动发送请求');
         handleSubmit(lastMessage.content);
       }
+      console.log('[ChatPage] 会话初始化完成，当前消息列表:', messages);
     };
     initSession();
   }, [unwrappedParams]); // 监听解包后的 params 的变化
@@ -41,6 +46,7 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
   const handleSubmit = async (content: string) => {
     if (!content.trim() || isLoading) return;
 
+    console.log('[ChatPage] 开始处理用户消息:', content);
     setShowLogo(false);
     const userMessage = { role: 'user', content };
     await addMessage(userMessage);
@@ -61,8 +67,9 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
       const decoder = new TextDecoder();
       let assistantMessage = { role: 'assistant', content: '' };
   
-      // 先添加一个空的assistant消息
-      await addMessage(assistantMessage);
+      console.log('[ChatPage] 开始接收AI响应');
+      // 更新UI显示一个空的assistant消息
+      setMessages(prev => [...prev, assistantMessage]);
   
       while (reader) {
         const { done, value } = await reader.read();
@@ -85,12 +92,13 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
   
               if (parsedData.text) {
                 assistantMessage.content += parsedData.text;
+                console.log('[ChatPage] 收到AI响应片段:', parsedData.text);
+                // 更新消息列表中的最后一条消息
                 setMessages(prev => {
                   const newMessages = [...prev];
                   const lastMessage = newMessages[newMessages.length - 1];
                   if (lastMessage?.role === 'assistant') {
                     lastMessage.content = assistantMessage.content;
-                    return newMessages;
                   }
                   return newMessages;
                 });
@@ -101,6 +109,10 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
           }
         }
       }
+      
+      console.log('[ChatPage] AI响应完成，保存到数据库');
+      // 只在消息完整接收后添加到数据库
+      await addMessage({ ...assistantMessage, content: assistantMessage.content });
     } catch (error) {
       console.error('发送消息失败:', error);
     } finally {

@@ -50,8 +50,17 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
   // 添加新消息
   const addMessage = async (message: Message) => {
-    setMessages(prev => [...prev, message]) // 添加消息到当前消息列表
+    console.log('[ChatContext] 添加新消息:', message)
+    // 只有在消息不存在于当前列表时才添加
+    setMessages(prev => {
+      const messageExists = prev.some(m => 
+        m.role === message.role && m.content === message.content
+      )
+      return messageExists ? prev : [...prev, message]
+    })
+    
     if (sessionId && !isLoading) {
+      console.log('[ChatContext] 将消息保存到数据库, sessionId:', sessionId)
       await chatDB.addMessage(sessionId, message) // 将消息添加到数据库
     }
   }
