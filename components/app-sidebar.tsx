@@ -50,81 +50,81 @@ const data = {
           title: "DeepSeek-R1",
           url: "/models/deepseek-r1",
         },
-        {
-          title: "DeepSeek-V3",
-          url: "/models/deepseek-v3",
-        },
+        // {
+        //   title: "DeepSeek-V3",
+        //   url: "/models/deepseek-v3",
+        // },
         {
           title: "Doubao-1.5-Lite-32K",
           url: "/models/doubao-1.5-lite-32k",
         },
-        {
-          title: "Doubao-1.5-Vision-Pro-32K",
-          url: "/models/doubao-1.5-vision-pro-32k",
-        },
+        // {
+        //   title: "Doubao-1.5-Vision-Pro-32K",
+        //   url: "/models/doubao-1.5-vision-pro-32k",
+        // },
       ],
     },
-    {
-      title: "知识库",
-      url: "/knowledge",
-      icon: BookOpen,
-      items: [
-        {
-          title: "文档管理",
-          url: "/knowledge/documents",
-        },
-        {
-          title: "知识图谱",
-          url: "/knowledge/graph",
-        },
-        {
-          title: "数据分析",
-          url: "/knowledge/analysis",
-        },
-      ],
-    },
-    {
-      title: "多模态",
-      url: "/multimodal",
-      icon: Frame,
-      items: [
-        {
-          title: "文档生成",
-          url: "/multimodal/word",
-        },
-        {
-          title: "PPT 生成",
-          url: "/multimodal/ppt",
-        },
-        {
-          title: "图片生成",
-          url: "/multimodal/image",
-        },
-        {
-          title: "视频生成",
-          url: "/multimodal/video",
-        },
-      ],
-    },
-    {
-      title: "设置",
-      url: "/settings",
-      icon: Settings2,
-      items: [
-        {
-          title: "基本设置",
-          url: "/settings/general",
-        },
-        {
-          title: "API 配置",
-          url: "/settings/api",
-        },
-        {
-          title: "用户管理",
-          url: "/settings/users",
-        },
-      ],
-    },
+    // {
+    //   title: "知识库",
+    //   url: "/knowledge",
+    //   icon: BookOpen,
+    //   items: [
+    //     {
+    //       title: "文档管理",
+    //       url: "/knowledge/documents",
+    //     },
+    //     {
+    //       title: "知识图谱",
+    //       url: "/knowledge/graph",
+    //     },
+    //     {
+    //       title: "数据分析",
+    //       url: "/knowledge/analysis",
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: "多模态",
+    //   url: "/multimodal",
+    //   icon: Frame,
+    //   items: [
+    //     {
+    //       title: "文档生成",
+    //       url: "/multimodal/word",
+    //     },
+    //     {
+    //       title: "PPT 生成",
+    //       url: "/multimodal/ppt",
+    //     },
+    //     {
+    //       title: "图片生成",
+    //       url: "/multimodal/image",
+    //     },
+    //     {
+    //       title: "视频生成",
+    //       url: "/multimodal/video",
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: "设置",
+    //   url: "/settings",
+    //   icon: Settings2,
+    //   items: [
+    //     {
+    //       title: "基本设置",
+    //       url: "/settings/general",
+    //     },
+    //     {
+    //       title: "API 配置",
+    //       url: "/settings/api",
+    //     },
+    //     {
+    //       title: "用户管理",
+    //       url: "/settings/users",
+    //     },
+    //   ],
+    // },
   ],
 }
 

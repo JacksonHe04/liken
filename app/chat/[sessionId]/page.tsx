@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, use, useRef } from "react"
+import { useState, useEffect, use } from "react"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 import { ChatInput } from "@/components/chat-input"
