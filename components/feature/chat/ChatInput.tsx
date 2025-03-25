@@ -2,9 +2,9 @@
 import { useState, FormEvent, useRef } from "react"
 import { Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTextareaAutoHeight } from "@/components/hooks/use-textarea-auto-height"
-import { ChatInputButtons } from "@/components/chat-input/chat-input-buttons"
-import type { ChatInputProps } from "@/components/chat-input/types"
+import { useTextareaAutoHeight } from "@/hooks/useTextareaAutoHeight"
+import { ChatInputButtons } from "@/components/feature/chat/ChatInputButtons"
+import type { ChatInputProps } from "@/types/chatInput"
 
 export function ChatInput({ onSubmit, onClear, disabled = false }: ChatInputProps) {
   const [input, setInput] = useState('')

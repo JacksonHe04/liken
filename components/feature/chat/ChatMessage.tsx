@@ -1,6 +1,6 @@
 "use client" // 标记为客户端组件
 
-import { MarkdownContent } from "./markdown-content"
+import { MarkdownContent } from "./MarkdownContent"
 
 // 定义ChatMessage组件的props类型
 type ChatMessageProps = {

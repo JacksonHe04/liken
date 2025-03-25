@@ -24,7 +24,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { chatDB } from "@/lib/db/chat-db"
+import { chatDB } from "@/lib/db/chatDb"
 
 // 定义会话接口
 interface Session {

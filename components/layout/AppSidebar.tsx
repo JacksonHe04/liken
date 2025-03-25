@@ -11,10 +11,10 @@ import {
   Settings2,
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavMain } from "@/components/layout/NavMain"
+import { NavProjects } from "@/components/layout/NavProjects"
+import { NavUser } from "@/components/layout/NavUser"
+import { TeamSwitcher } from "@/components/layout/TeamSwitcher"
 import {
   Sidebar,
   SidebarContent,

@@ -2,7 +2,7 @@
 
 // 导入必要的模块和类型
 import { createContext, useContext, useState, ReactNode } from "react"
-import { chatDB } from "@/lib/db/chat-db"
+import { chatDB } from "@/lib/db/chatDb"
 
 // 定义消息类型
 type Message = {

@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation"
 import { LikeLogo } from "@/components/ui/logo/like-logo"
 import Image from "next/image"
-import { chatDB } from "@/lib/db/chat-db"
-import { useChatContext } from "@/contexts/chat-context"
+import { chatDB } from "@/lib/db/chatDb"
+import { useChatContext } from "@/contexts/chatContext"
 import { Button } from "@/components/ui/button"
 
 export default function Page() {

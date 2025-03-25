@@ -2,16 +2,16 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar } from "@/components/layout/AppSidebar"
 import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { ChatProvider } from "@/contexts/chat-context"
+import { ChatProvider } from "@/contexts/chatContext"
 import Image from "next/image";
-import ChatButton from "@/components/ChatButton";
+import ChatButton from "@/components/feature/chat/ChatButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
