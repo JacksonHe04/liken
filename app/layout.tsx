@@ -12,6 +12,7 @@ import {
 import { ChatProvider } from "@/contexts/chatContext"
 import Image from "next/image";
 import ChatButton from "@/components/feature/chat/ChatButton";
+import { ModelProvider } from "@/contexts/modelContext"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,23 +41,23 @@ export default function RootLayout({
       >
         <SidebarProvider>
           <ChatProvider>
-            <AppSidebar />
-            <SidebarInset>
-              <header className="flex h-16 shrink-0 items-center justify-between gap-2 px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-                <div className="flex items-center gap-2 px-2">
-                  <SidebarTrigger className="-ml-1" />
-                  <ChatButton />
-                </div>
-                <Image src="/next.svg" alt="Next.js icon" width={90} height={36}/>
-              </header>
-              <Separator orientation="horizontal" className="my-2" />
-              <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+            <ModelProvider>
+              <AppSidebar />
+              <SidebarInset>
+                <header className="flex h-16 shrink-0 items-center justify-between gap-2 px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+                  <div className="flex items-center gap-2 px-2">
+                    <SidebarTrigger className="-ml-1" />
+                    <ChatButton />
+                  </div>
+                  <Image src="/next.svg" alt="Next.js icon" width={90} height={36}/>
+                </header>
+                <Separator />
                 {children}
-              </div>
-            </SidebarInset>
+              </SidebarInset>
+            </ModelProvider>
           </ChatProvider>
         </SidebarProvider>
       </body>
     </html>
-  );
+  )
 }

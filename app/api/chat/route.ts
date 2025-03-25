@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { cookies } from 'next/headers';
 
 // 初始化OpenAI客户端
 const openai = new OpenAI({
@@ -19,11 +20,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // 获取当前选择的模型
+    const cookieStore = cookies();
+    const modelCookie = cookieStore.get('currentModel');
+    const currentModel = modelCookie?.value || 'doubao-1.5-lite-32k-250115';
+
+    console.log('当前使用的模型:', currentModel);
+
     // 创建流式响应
     const stream = await openai.chat.completions.create({
-      // model: 'deepseek-r1-250120',
-      model: 'deepseek-v3-241226',
-      // model: 'doubao-1.5-lite-32k-250115',
+      model: currentModel,
       messages: [
         { role: 'system', content: '你是人工智能助手' },
         ...messages,
