@@ -22,13 +22,8 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
     const initSession = async () => {
       console.log('[ChatPage] 开始初始化会话');
       const sessionId = unwrappedParams.sessionId;
-      if (sessionId === 'new') {
-        console.log('[ChatPage] 创建新会话');
-        await createSession();
-      } else {
-        console.log('[ChatPage] 加载已有会话:', sessionId);
-        await loadSession(sessionId);
-      }
+      console.log('[ChatPage] 加载已有会话:', sessionId);
+      await loadSession(sessionId);
       setIsLoading(false);
     };
     initSession();
@@ -48,7 +43,7 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
 
     // 立即将用户消息添加到消息列表中，实现即时反馈
     setMessages(prev => [...prev, userMessage]);
-  
+
     try {
       // 向后端API发送POST请求，包含历史消息和当前用户消息
       const response = await fetch('/api/chat', {
@@ -56,54 +51,54 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: [...messages, userMessage] }),
       });
-  
+
       // 检查响应状态
       if (!response.ok) throw new Error('请求失败');
-      
+
       // 初始化流式响应处理
       const reader = response.body?.getReader(); // 获取响应流的读取器
       const decoder = new TextDecoder(); // 用于将字节数据解码为文本
       // 初始化AI助手的响应消息
       let assistantMessage = { role: 'assistant', content: '' };
-  
+
       console.log('[ChatPage] 开始接收AI响应');
       // 预先在UI中显示一个空的AI响应，后续会逐步填充内容
       setMessages(prev => [...prev, assistantMessage]);
-  
+
       // 持续读取响应流
       while (reader) {
         // 读取一个数据块
         const { done, value } = await reader.read();
         // 如果读取完成，退出循环
         if (done) break;
-  
+
         // 将字节数据解码为文本
         const chunk = decoder.decode(value);
         // 按换行符分割，因为SSE格式是按行发送的
         const lines = chunk.split('\n');
-  
+
         // 处理每一行数据
         for (const line of lines) {
           // SSE格式的数据以 "data: " 开头
           if (line.startsWith('data: ')) {
             const data = line.slice(5).trim(); // 移除 "data: " 前缀
             if (!data) continue; // 跳过空数据
-  
+
             try {
               // 解析JSON数据
               const parsedData = JSON.parse(data);
-              
+
               // 如果收到完成标记，结束处理
               if (parsedData.done) {
                 break;
               }
-  
+
               // 如果收到文本内容
               if (parsedData.text) {
                 // 将新内容追加到AI响应中
                 assistantMessage.content += parsedData.text;
                 console.log('[ChatPage] 收到AI响应片段:', parsedData.text);
-                
+
                 // 更新UI中显示的AI响应内容
                 // 注意这里使用函数式更新以确保状态更新的准确性
                 setMessages(prev => {
@@ -121,7 +116,7 @@ export default function ChatPage({ params }: { params: { sessionId: string } }) 
           }
         }
       }
-      
+
       console.log('[ChatPage] AI响应完成，保存到数据库');
       // 将用户消息和完整的AI响应保存到数据库
       await addMessage(userMessage);
